@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        form {
+            border: 3px solid #f1f1f1;
+        }
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 200px;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 40%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        .cursor {
+            cursor: pointer;
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        .news_image {
+            width: 69px;
+            height: 53px;
+            object-fit: cover;
+        }
+
+        .news_container {
+            border: 1px solid #88b0ec;
+            cursor: pointer;
+        }
+
+        .category_button {
+            width: 100px;
+            margin-left: 3px;
+        }
+
+
+        .category_image {
+            width: 69px;
+            height: 53px;
+            object-fit: cover;
+        }
+
+        .category_dot {
+            width: 6px;
+            height: 6px;
+            background-color: #787878;
+            border-radius: 3px;
+            align-self: center;
+            margin: 5px;
+        }
+
+        .category_container {
+            border: 1px solid #88b0ec;
+        }
+
+        .category_button {
+            width: 120px;
+            margin-left: 3px;
+        }
+
+        .add_category_button {
+            width: 80%;
+        }
+
+        .modal {
+            overflow-x: visible;
+        }
+
+        .note-toolbar {
+            flex-wrap: wrap;
+        }
+
+        .dropdown-toggle::after {
+            display: none !important;
+        }
+
+        .note-toolbar, .note-color-all, .note-para, .note-font, .note-insert, .note-view {
+        }
+
+        .note-style {
+        }
+
+        .note-btn {
+            margin: 0 1px 0 0 !important;
+        }
+
+        .note-align, .note-list {
+            width: 80px;
+            display: flex !important;
+            margin: 1px 0 !important;
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+            span.psw {
+                display: block;
+                float: none;
+            }
+
+            .cancelbtn {
+                width: 100%;
+            }
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/23.1.0/decoupled-document/ckeditor.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+</head>
+
+<body>
+<form id="login-form" style="max-width: 500px; margin: 0 auto;">
+    <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required id="username">
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required id="password">
+        <button type="button" onclick="login()">Login</button>
+    </div>
+</form>
+</div>
+<div id="button" style="display: none">
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-light" onclick="getRegistrations(1)">Registration</button>
+        <button type="button" class="btn btn-light" onclick="getCategory()">Category</button>
+        <button type="button" class="btn btn-light" onclick="getCars(1)">Selling Cars</button>
+        <button type="button" class="btn btn-light" onclick="getCars(0)">Sold Cars</button>
+    </div>
+</div>
+<br>
+</div>
+<div id="data">
+</div>
+<div id="modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="modalData"></div>
+            </div>
+            <div class="modal-footer">
+                <div id="modal-button"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal-reservation" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="modal-reservation-data"></div>
+            </div>
+            <div class="modal-footer">
+                <div id="modal-reservation-button"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    var url = 'http://192.168.1.44:3002';
+
+    var stateValue = {
+        1: "ACTIVE",
+        2: "INACTIVE",
+        3: "DELETE",
+    }
+
+
+    $.ajaxSetup({contentType: "application/json; charset=utf-8",});
+    if (sessionStorage.getItem("secret_key")) {
+        $.ajaxSetup({contentType: "application/json; charset=utf-8",});
+        document.getElementById("login-form").innerHTML = "";
+        document.getElementById("button").style.display = "block";
+    }
+
+    function login() {
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        console.log(username);
+        let data = {
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value
+        }
+        $.post(
+            url + "/auth/login", JSON.stringify(data),
+            function (data, status) {
+                if (status == "success") {
+                    let secret_key = data.data.secret_key;
+                    sessionStorage.clear();
+                    sessionStorage.setItem("secret_key", secret_key);
+                    console.log("Data: " + data + "\nStatus: " + status);
+                    document.getElementById("login-form").innerHTML = "";
+                    document.getElementById("button").style.display = "block";
+                }
+            }, "json");
+    }
+
+    function showCars(index) {
+        let cars = JSON.parse(sessionStorage.getItem("carsData"))[index];
+        let published = (cars.published == 1) ? "Đang bán" : "Đã bán"
+        let created = getFormatedTime(new Date(cars.created * 1000))
+        let categoryList = JSON.parse(sessionStorage.getItem("categoryData"));
+        var category = ""
+
+
+        let modalData = "" +
+            '<div class="pl-5 pr-5 mt-2 row">' +
+            "<div class=\"m-2 col-12\">Tiêu đề: " + cars.title + "</div>" +
+            "<div class=\"m-2 col-12\">Danh mục: " + category + "</div>" +
+            '<div class="col-12 m-2">Trang thái: ' + published + "</div>" +
+            "<div class=\"m-2 col-12\">Ngày tạo: " + created + "</div>" +
+            "<div class=\"m-2 col-12 mt-5\"Nội dung: >" + cars.content + "</div>" +
+            '</div>'
+
+        document.getElementById("modalData").innerHTML = modalData;
+
+        let modalButton = ""
+        document.getElementById("modal-button").innerHTML = modalButton;
+    }
+
+    function showeditCars(index) {
+        let cars = JSON.parse(sessionStorage.getItem("carsData"))[index];
+        let categoryList = JSON.parse(sessionStorage.getItem("categoryData"));
+        let published = (cars.published == 1) ? "publishedRadio" : "retrievedRadio"
+        var category = 0
+
+        let modalData = "" +
+            '<div class="pl-5 pr-5 mt-2 row">' +
+            "<div class=\"m-2 col-12 p-0\">" +
+            '<input class="form-control" type="text" id="vi-news-title"></input>' +
+            "</div>" +
+            "<div class=\"m-2 col-12 p-0\">" +
+            "<label class=\"form-check-label\">" + "Chọn danh mục: " + "</label>" +
+            "<div class=\"form-check\">" +
+            "<input class=\"form-check-input\" type=\"radio\" name=\"flexRadioDefault\" id=\"publishedRadio\">" + "Đang bán" + "</input>" +
+            "</div>" +
+            "<div class=\"form-check\">" +
+            "<input class=\"form-check-input\" type=\"radio\" name=\"flexRadioDefault\" id=\"retrievedRadio\">" + "Đã bán" + "</input>" +
+            "</div>" +
+            "</div>" +
+            '<div class="dropdown m-2 p-0">' +
+            "<label class=\"form-check-label\">" + "Chọn danh mục: " + "</label>" +
+            '<select class="form-control" id="categorySelect">'
+
+        for (var i = 0; i < categoryList.length; i++) {
+            if (categoryList[i].id == cars.category_list[0].id) {
+                category = categoryList[i].id
+            }
+            modalData += "" +
+                '<option class="dropdown-item" value=' + categoryList[i].id + '>' + categoryList[i].title + '</option>'
+        }
+
+
+        modalData += "" +
+            "</select>" +
+            "</div>" +
+            "<div class=\"m-2 col-12 p-0\">" +
+            "<label >" + "Mô tả: " + "</label>" +
+            '<input name="description" class="form-control" type="text" id="vi-news-description"></input>' +
+            "</div>" +
+            "<div class=\"m-2 col-12 p-0\">" +
+            "<label >" + "Giá: " + "</label>" +
+            '<input name="price" class="form-control" type="text" id="price-edit"></input>' +
+            "</div>" +
+            "<div class=\"m-2 col-12 p-0 mb-5 mt-2\">" +
+            '<div>Content:</div>' +
+            '<div name="content" id="newsEditorVI">' + "</div>" +
+            "</div>" +
+            "<div class=\"m-2 col-12 p-0\">" +
+            '<input class="form-control" type="text" placeholder="Thumbnail" id="new_car_thumbnail"></input>' +
+            "</div>" +
+            '</div>'
+
+        document.getElementById("modalData").innerHTML = modalData;
+        document.getElementById(published).checked = true
+        document.getElementById("categorySelect").value = category
+        document.getElementById("vi-news-title").value = cars.title
+        document.getElementById("vi-news-description").value = cars.description
+        document.getElementById("price-edit").value = cars.price
+        document.getElementById("newsEditorVI").innerHTML = cars.content
+        document.getElementById("new_car_thumbnail").value = cars.thumbnail
+
+
+        $('#newsEditorVI').summernote({
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Inter', 'Times New Roman', 'Helvetica', 'Impact', 'Tahoma', 'Verdana'],
+            fontNamesIgnoreCheck: ['Inter'],
+            fontSizes: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '22', '24', '28', '32', '36', '40', '48'],
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['style', 'clear', 'bold', 'italic', 'underline']],
+                ['font', ['strikethrough', 'superscript', 'subscript', 'clear']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize', 'fontsizeunit']],
+                ['height', ['height']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video', 'hr']],
+                ['view', ['codeview', 'undo', 'redo']],
+            ]
+        }, 'code', cars.content)
+
+        let modalButton = "" + '<button type="button" class="btn btn-primary btn-lg" onclick="editCars(' + cars.id + ')">Cập nhật</button>'
+        document.getElementById("modal-button").innerHTML = modalButton;
+    }
+
+    function editCars(carsId) {
+        let viTitle = document.getElementById("vi-news-title").value
+        let published = (document.getElementById("publishedRadio").checked) ? 1 : 0
+        let viDescription = document.getElementById("vi-news-description").value
+        let viContent = $('#newsEditorVI').summernote('code')
+        let categoryId = parseInt(document.getElementById("categorySelect").value)
+        let thumbnail = document.getElementById("new_car_thumbnail").value
+        let price = document.getElementById("price-edit").value
+
+        const data = {
+            "title": viTitle,
+            "published": published,
+            "description": viDescription,
+            "category_id": categoryId,
+            "content": viContent,
+            "price": price,
+            "thumbnail": thumbnail
+        }
+
+        var settings = {
+            "url": url + "/item/" + carsId + "?secret_key=" + sessionStorage.getItem("secret_key"),
+            "method": "PUT",
+            "dataType": 'JSON',
+            "contentType": 'application/json',
+            "data": JSON.stringify(data)
+        }
+
+        $.ajax(settings).done(function (response, status) {
+            if (status == "success") {
+                alert("Success");
+                window.location.reload();
+            } else {
+                alert("false");
+            }
+        })
+
+    }
+
+    function showAddCars() {
+        let categoryList = JSON.parse(sessionStorage.getItem("categoryData"));
+        let modalData = "" +
+            '<div class="pl-5 pr-5 mt-2 row">' +
+            "<div class=\"m-2 col-12 p-0\">" +
+            '<input class="form-control" type="text" placeholder="Title" id="vi-news-title"></input>' +
+            "</div>" +
+            "<div class=\"m-2 col-12 p-0\">" +
+            "<label class=\"form-check-label\">" + "Chọn trạng thái: " + "</label>" +
+            "<div class=\"form-check\">" +
+            "<input class=\"form-check-input\" type=\"radio\" name=\"flexRadioDefault\" id=\"publishedRadio\">" +
+            "<label class=\"form-check-label\" for=\"publishedRadio\">" + "Xuất bản" + "</label>" +
+            "</div>" +
+            "<div class=\"form-check\">" +
+            "<input class=\"form-check-input\" type=\"radio\" name=\"flexRadioDefault\" id=\"retrievedRadio\">" +
+            "<label class=\"form-check-label\" for=\"retrievedRadio\">" + "Thu hồi" + "</label>" +
+            "</div>" +
+            "</div>" +
+            '<div class="dropdown m-2">' +
+            "<label class=\"form-check-label\">" + "Chọn danh mục: " + "</label>" +
+            '<select class="form-control" id="categorySelect" >'
+
+        for (var i = 0; i < categoryList.length; i++) {
+            modalData += "" +
+                '<option class="dropdown-item" value=' + categoryList[i].id + '>' + categoryList[i].title + '</option>'
+        }
+        modalData += "" +
+            "</select>" +
+            "</div>" +
+            "<div class=\"m-2 col-12 p-0\">" +
+            '<input class="form-control" type="text" placeholder="Description" id="vi-news-description"></input>' +
+            "</div>" +
+            "<div class=\"m-2 col-12 p-0\">" +
+            '<input class="form-control" type="number" placeholder="Price" id="new_car_price"></input>' +
+            "</div>" +
+            "<div class=\"m-2 col-12 p-0 mb-5 mt-2\">" +
+            '<div>Content:</div>' +
+            '<div name="content" id="newsEditorVI">' + "</div>" +
+            "</div>" +
+            "<div class=\"m-2 col-12 p-0\">" +
+            '<input class="form-control" type="text" placeholder="Thumbnail" id="new_car_thumbnail"></input>' +
+            "</div>" +
+            '</div>'
+
+        document.getElementById("modalData").innerHTML = modalData;
+
+        document.getElementById("categorySelect").value = ""
+
+        $('#newsEditorVI').summernote({
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Inter', 'Times New Roman', 'Helvetica', 'Impact', 'Tahoma', 'Verdana'],
+            fontNamesIgnoreCheck: ['Inter'],
+            fontSizes: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '22', '24', '28', '32', '36', '40', '48'],
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['style', 'clear', 'bold', 'italic', 'underline']],
+                ['font', ['strikethrough', 'superscript', 'subscript', 'clear']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize', 'fontsizeunit']],
+                ['height', ['height']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video', 'hr']],
+                ['view', ['codeview', 'undo', 'redo']],
+            ]
+        });
+        let modalButton = "" + '<button type="button" class="btn btn-primary btn-lg" onclick="createCars()">Tạo bài viết</button>'
+        document.getElementById("modal-button").innerHTML = modalButton;
+    }
+
+    function createCars() {
+        let viTitle = document.getElementById("vi-news-title").value
+        let published = (document.getElementById("publishedRadio").checked) ? 1 : 0
+        let viDescription = document.getElementById("vi-news-description").value
+        let viContent = $('#newsEditorVI').summernote('code')
+        let categoryId = document.getElementById("categorySelect").value
+        let price = document.getElementById("new_car_price").value
+        let thumbnail = document.getElementById("new_car_thumbnail").value
+
+        const data = {
+            "title": viTitle,
+            "published": published,
+            "description": viDescription,
+            "category_id": categoryId,
+            "content": viContent,
+            "price": price,
+            "thumbnail": thumbnail
+        }
+
+        $.post(
+            url + '/item' + "?secret_key=" + sessionStorage.getItem("secret_key"),
+            JSON.stringify(data),
+            function (data, status) {
+                if (status == "success") {
+                    alert("Success");
+                    window.location.reload();
+                } else {
+                    alert("false");
+                }
+            },
+            "json"
+        );
+    }
+
+    function showEditCategory(index) {
+        let currentCategory = JSON.parse(sessionStorage.getItem("categoryData"))[index];
+
+        let modalData = "" +
+            '<div class="pl-5 pr-5 mt-2 row">' +
+            "<div class=\"m-2 col-12 p-0\">" +
+            '<input class="form-control" type="text" id="vi-category-title"></input>' +
+            "</div>" +
+            "<div class=\"m-2 col-12\">" +
+            "<div class=\"form-check\">" +
+            "<input class=\"form-check-input\" type=\"radio\" name=\"flexRadioDefault\" id=\"publishedRadio\">" +
+            "<label class=\"form-check-label\" for=\"publishedRadio\">" + "Xuất bản" + "</label>" +
+            "</div>" +
+            "<div class=\"form-check\">" +
+            "<input class=\"form-check-input\" type=\"radio\" name=\"flexRadioDefault\" id=\"retrievedRadio\" checked>" +
+            "<label class=\"form-check-label\" for=\"retrievedRadio\">" + "Thu hồi" + "</label>" +
+            "</div>" +
+            "</div>" +
+            "<div class=\"m-2 col-12 p-0\">" +
+            '<input class="form-control" type="text" id="vi-description-title"></input>' +
+            "</div>" +
+            "<div class=\"m-2 col-12 p-0\">" +
+            '<input class="form-control" type="text" placeholder="Đường dẫn của ảnh" id="img_url_string"></input>' +
+            "</div>" +
+            '</div>'
+
+        document.getElementById("modalData").innerHTML = modalData;
+        document.getElementById("vi-category-title").value = currentCategory.title
+        if (currentCategory.published == 1) {
+            document.getElementById("publishedRadio").checked = true
+        } else {
+            document.getElementById("retrievedRadio").checked = true
+        }
+        document.getElementById("vi-description-title").value = currentCategory.description
+        document.getElementById("img_url_string").value = currentCategory.image
+
+        let modalButton = "" + '<button type="button" class="btn btn-primary btn-lg" onclick="editCategory(' + currentCategory.id + ')">Lưu</button>'
+        document.getElementById("modal-button").innerHTML = modalButton;
+    }
+
+    function editCategory(categoryId) {
+        let viTitle = document.getElementById("vi-category-title").value
+
+        let published = (document.getElementById("publishedRadio").checked) ? 1 : 0
+        let image = document.getElementById("img_url_string").value
+        let viDescription = document.getElementById("vi-description-title").value
+
+        const data = {
+            "title": viTitle,
+            "image": image,
+            "published": published,
+            "description": viDescription,
+        }
+        console.log(data)
+
+        var settings = {
+            "url": url + "/category/" + categoryId + "?secret_key=" + sessionStorage.getItem("secret_key"),
+            "method": "PUT",
+            "dataType": 'JSON',
+            "contentType": 'application/json',
+            "data": JSON.stringify(data)
+        }
+
+        $.ajax(settings).done(function (response, status) {
+            if (status == "success") {
+                alert("Success");
+                window.location.reload();
+            } else {
+                alert("false");
+            }
+        })
+    }
+
+    function showDeleteCategory(index) {
+        let currentCategory = JSON.parse(sessionStorage.getItem("categoryData"))[index];
+        console.log(currentCategory)
+        let modalData = "" +
+            '<div class="pl-5 pr-5 mt-2 row">' + "Bạn có chắc chắn muốn xoá?" + "</div>"
+        document.getElementById("modalData").innerHTML = modalData;
+
+        let modalButton = "" +
+            '<div class="pl-5 pr-5 mt-2 row">' +
+            '<button type="button" class="btn btn-success col-5 category_button" onclick="deleteCategory(' + currentCategory.id + ')">Đồng ý</button>' +
+            '<button type="button" class="btn btn-primary col-5 category_button">Huỷ bỏ</button>' +
+            '</div>'
+        document.getElementById("modal-button").innerHTML = modalButton;
+    }
+
+    function deleteCategory(categoryId) {
+        var settings = {
+            "url": url + "/category/" + categoryId + "?secret_key=" + sessionStorage.getItem("secret_key"),
+            "method": "DELETE",
+            "dataType": 'JSON'
+        }
+        $.ajax(settings).done(function (response, status) {
+            if (status == "success") {
+                alert("Success");
+                window.location.reload();
+            } else {
+                alert("false");
+            }
+        })
+    }
+
+    function showAddCategory() {
+        let modalData = "" +
+            '<div class="pl-5 pr-5 mt-2 row">' +
+            "<div class=\"m-2 col-12 p-0\">" +
+            '<input class="form-control" type="text" placeholder="Name" id="vi-category-title"></input>' +
+            "</div>" +
+            "<div class=\"m-2 col-12\">" +
+            "<div class=\"form-check\">" +
+            "<input class=\"form-check-input\" type=\"radio\" name=\"flexRadioDefault\" id=\"publishedRadio\">" +
+            "<label class=\"form-check-label\" for=\"publishedRadio\">" + "Xuất bản" + "</label>" +
+            "</div>" +
+            "<div class=\"form-check\">" +
+            "<input class=\"form-check-input\" type=\"radio\" name=\"flexRadioDefault\" id=\"retrievedRadio\">" +
+            "<label class=\"form-check-label\" for=\"retrievedRadio\">" + "Thu hồi" + "</label>" +
+            "</div>" +
+            "</div>" +
+            "<div class=\"m-2 col-12 p-0\">" +
+            '<input class="form-control" type="text" placeholder="Description" id="vi-description-title"></input>' +
+            "</div>" +
+            "<div class=\"m-2 col-12 p-0\">" +
+            '<input class="form-control" type="text" placeholder="Đường dẫn của ảnh" id="img_url_string"></input>' +
+            "</div>" +
+            '</div>'
+
+        document.getElementById("modalData").innerHTML = modalData;
+
+        let modalButton = "" + '<button type="button" class="btn btn-primary btn-lg" onClick="createCategory()">Tạo danh mục</button>'
+        document.getElementById("modal-button").innerHTML = modalButton;
+    }
+
+    function createCategory() {
+        let viTitle = document.getElementById("vi-category-title").value
+        let published = (document.getElementById("publishedRadio").checked) ? 1 : 0
+        let viDescription = document.getElementById("vi-description-title").value
+        let imageUrlString = document.getElementById("img_url_string").value
+
+        const data = {
+            "title": viTitle,
+            "published": published,
+            "description": viDescription,
+            "image": imageUrlString
+        }
+
+        $.post(
+            url + '/category' + "?secret_key=" + sessionStorage.getItem("secret_key"),
+            JSON.stringify(data),
+            function (data, status) {
+                if (status == "success") {
+                    alert("Success");
+                    window.location.reload();
+                } else {
+                    alert("false");
+                }
+            },
+            "json"
+        );
+    }
+
+    function soldCar(data) {
+        let data2Update = data;
+        data2Update.published = 0
+        $.ajax({
+            type: 'PUT',
+            url: url + "/item/" + data.id + "?secret_key=" + sessionStorage.getItem("secret_key"),
+            contentType: 'application/json',
+            data: JSON.stringify(data2Update)
+        }).done(function () {
+            alert("Update state thành công")
+            window.location.reload();
+        }).fail(function (msg) {
+            console.log('FAIL');
+        }).always(function (msg) {
+            console.log('ALWAYS');
+        });
+    }
+
+
+    function showDeleteCars(index) {
+        let cars = JSON.parse(sessionStorage.getItem("carsData"))[index];
+        let modalData = "" +
+            '<div class="pl-5 pr-5 mt-2 row">' + "Bạn có chắc chắn muốn xoá?" + "</div>"
+        document.getElementById("modalData").innerHTML = modalData;
+
+        let modalButton = "" +
+            '<div class="pl-5 pr-5 mt-2 row">' +
+            '<button type="button" class="btn btn-success col-5 category_button" onclick="deleteCars(' + cars.id + ')">Đồng ý</button>' +
+            '<button type="button" class="btn btn-primary col-5 category_button">Huỷ bỏ</button>' +
+            '</div>'
+        document.getElementById("modal-button").innerHTML = modalButton;
+    }
+
+    function deleteCars(carsId) {
+        console.log("delete")
+        var settings = {
+            "url": url + "/item/" + carsId + "?secret_key=" + sessionStorage.getItem("secret_key"),
+            "method": "DELETE",
+            "dataType": 'JSON'
+        }
+        $.ajax(settings).done(function (response, status) {
+            if (status == "success") {
+                alert("Success");
+                window.location.reload();
+            } else {
+                alert("false");
+            }
+        })
+    }
+
+    let published = 1;
+
+    function getCars(published) {
+        let params = "?published=" + published;
+
+        $.get(url + '/category', function (response, status) {
+            sessionStorage.setItem("categoryData", JSON.stringify(response.data));
+        })
+
+        $.get(url + '/item' + params, function (response, status) {
+            sessionStorage.setItem("carsData", JSON.stringify(response.data));
+            let table = "" +
+                '<div class="form-group">' +
+                '<input type="text" class="form-control" id="filter" placeholder="Search">' +
+                '</div>'
+
+            let addButton = published ? "<div class=\"row pl-5 pr-5 w-25 ml-1 mt-2 mb-2\">" +
+                '<button class="btn btn-outline-success btn-lg" data-toggle="modal" data-target="#modal" onclick="showAddCars()">' + "Thêm Xe" + "</button>" +
+                "</div>" : ""
+            table += '' +
+                addButton +
+                '<div class="row pl-5 pr-5">' +
+                "<div class=\"col\">"
+
+            let categoryList = JSON.parse(sessionStorage.getItem("categoryData"));
+            let data = (response.data) ? response.data : []
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].state == 1) {
+                    let published = (data[i].published == 1) ? "Đang bán" : "Đã bán"
+                    let created = getFormatedTime(new Date(data[i].created * 1000))
+                    let imgUrl = ""
+                    var category = ""
+                    let toSoldButton = (data[i].published === 1) ?
+                        "<button class='btn btn-outline-danger category_button'  onclick='soldCar(" + JSON.stringify(data[i]) + " )'>" + "Đã bán" + "</button>"
+                        : ""
+
+                    table += '' +
+                        "<div class=\"row p-1 m-1 news_container\">" +
+                        // "<img src=" + imgUrl + " class=\"news_image m-2\" id=\"news-image\"></img>" +
+                        '<div class="col-8 m-2 col" data-toggle="modal" data-target="#modal" onclick="showCars(' + i + ')">' +
+                        "<div class=\"text-gray-800 row\">Tiêu đề: " + data[i].title + "</div>" +
+                        "<div class=\"text-gray-800 row\">Danh mục: " + category + "</div>" +
+                        "<div class=\"text-gray-800 row\">Trạng thái: " + published + "</div>" +
+                        "<div class=\"text-gray-800 row\">Ngày tạo: " + created + "</div>" +
+                        "<div class=\"text-gray-800 row\">Mô tả: " + data[i].description + "</div>" +
+                        "</div>" +
+                        "<div class=\"col-3 m-auto\">" +
+                        '<button class="btn btn-outline-primary category_button" data-toggle="modal" data-target="#modal" onclick="showeditCars(' + i + ')">' + "Sửa" + "</button>" +
+                        '<button class="btn btn-outline-danger category_button" data-toggle="modal" data-target="#modal" onclick="showDeleteCars(' + i + ')">' + "Xoá" + "</button>" +
+                        toSoldButton +
+                        "</div>" +
+                        "</div>"
+                }
+            }
+
+            table += '' +
+                '</div>' +
+                "</div>"
+
+            document.getElementById("data").innerHTML = table;
+            var input = document.getElementById("filter");
+            input.addEventListener("keyup", function (event) {
+                if (event.keyCode === 13) {
+                    getCars();
+                    event.preventDefault();
+                    // document.getElementById("myBtn").click();
+                }
+            });
+        })
+    }
+
+    function getCategory() {
+
+        let filter = document.getElementById("filter") ? document.getElementById("filter").value : null;
+
+        let filterKey = ["title"]
+        let paging = filter ? 0 : 1
+        if (filter) {
+            for (var i = 0; i < filterKey.length; i++) {
+                params += "&" + filterKey[i] + "=" + filter
+            }
+        }
+        $.get(url + '/category', function (response, status) {
+            sessionStorage.setItem("categoryData", JSON.stringify(response.data));
+            console.log(response.data);
+            let table = "" +
+                '<div class="form-group">' +
+                '<input type="text" class="form-control" id="filter" placeholder="Search">' +
+                '</div>'
+
+            table += '' +
+                '<div class="row pl-5 pr-5">' +
+                "<div class=\"col\">"
+
+            let data = (response.data) ? response.data : []
+
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].state == 1) {
+                    console.log(data[i]);
+                    let published = (data[i].published == 1) ? "Đã xuất bản" : "Đã thu hồi"
+                    let created = getFormatedTime(new Date(data[i].created * 1000))
+                    let imgUrl = data[i].image
+
+                    table += '' +
+                        "<div class=\"row p-1 m-1 category_container\">" +
+                        "<img src=" + imgUrl + " class=\"category_image m-2\"></img>" +
+                        "<div class=\"col-7 m-2 col\">" +
+                        "<div class=\"text-gray-800 row\">" + data[i].title + "</div>" +
+                        "<div class=\"py-auto text-gray-600 row\">" +
+                        "<div class=\"col-2 p-0\">" + published + "</div>" +
+                        "<span class=\"category_dot ml-3\">" + "</span>" +
+                        "<div class=\"col-3 p-0\">" + created + "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class=\"col-3 m-auto\">" +
+                        '<button class="btn btn-outline-primary category_button" data-toggle="modal" data-target="#modal" onclick="showEditCategory(' + i + ')">' + "Sửa" + "</button>" +
+                        '<button class="btn btn-outline-danger category_button" data-toggle="modal" data-target="#modal" onclick="showDeleteCategory(' + i + ')">' + "Xoá" + "</button>" +
+                        "</div>" +
+                        "</div>"
+                }
+            }
+
+            table += '' +
+                '</div>' +
+                "</div>" +
+                "<div class=\"row pl-5 pr-5\">" +
+                '<button class="btn btn-outline-success btn-lg" data-toggle="modal" data-target="#modal" onclick="showAddCategory()">' + "Thêm danh mục" + "</button>" +
+                "</div>"
+
+
+            document.getElementById("data").innerHTML = table;
+            var input = document.getElementById("filter");
+            input.addEventListener("keyup", function (event) {
+                if (event.keyCode === 13) {
+                    getCategory();
+                    event.preventDefault();
+                    // document.getElementById("myBtn").click();
+                }
+            });
+        })
+    }
+
+    // REGISTRATION
+    var state = 1
+
+    function getRegistrations(state) {
+
+        var params = "";
+        var table = "" +
+            '<div class="btn-group" role="group">' +
+            '<button type="button" class="btn btn-primary" onclick="getRegistrations(1)">Danh sách mới</button>' +
+            '<button type="button" class="btn btn-light"  onclick="getRegistrations(2)">Danh sách đã xử lý</button>' +
+            '</div>' +
+            '<div class="btn-group" role="group" style="float: right; display: none" id="processed">' +
+            '<button type="button" class="btn btn-success" onclick="processed()">Đánh dấu đã xử lý</button>' +
+            '</div>';
+        if (state != undefined) {
+            params = "?state=" + state + "&secret_key=" + sessionStorage.getItem("secret_key");
+            table = "" +
+                '<div><div class="btn-group" role="group">' +
+                '<button id="state1" type="button" class="btn btn-' + (state == 1 ? 'primary' : 'light') + '" onclick="setActive(1); getRegistrations(1)">Danh sách mới</button>' +
+                '<button id="state4" type="button" class="btn btn-' + (state == 2 ? 'primary' : 'light') + '" onclick="setActive(2); getRegistrations(2)">Danh sách đã xử lý</button>' +
+                '</div>'
+            console.log(sessionStorage.getItem("active"))
+
+            if (sessionStorage.getItem("active") == 1) {
+                table += '<div class="btn-group" role="group" style="float: right; display: none" id="processed">' +
+                    '<button type="button" class="btn btn-success" onclick="processed()">Đánh dấu đã xử lý</button>' +
+                    '</div></div>'
+            }
+
+            // table = "" +
+            //     '<div class="btn-group" role="group">' +
+            //     '<button type="button" class="btn btn-light" onclick="getRegistrations(1)">Danh sách mới</button>' +
+            //     '<button type="button" class="btn btn-primary"  onclick="getRegistrations(2)">Danh sách đã xử lý</button>' +
+            //     '</div>';
+            // '<div class="btn-group" role="group" style="float: right; display: none">' +
+            //   '<button type="button" class="btn btn-success" onclick="processed()">Đánh dấu đã xử lý</button>' +
+            // '</div>'
+        }
+        $.get(url + "/customer" + params, function (data, status) {
+            sessionStorage.setItem("registration", JSON.stringify(data));
+            sessionStorage.setItem("processedRegistration", JSON.stringify([]));
+            table += renderTable(data.data);
+            document.getElementById("data").innerHTML = table;
+        });
+    }
+
+    function setActive(state) {
+        console.log(state);
+        sessionStorage.setItem("active", state);
+    }
+
+    function renderTable(data) {
+        console.log(data);
+        let table = '' +
+            "<table style class=\"table table-hover\">" +
+            "   <thead>" +
+            "           <tr>" +
+            "                   <th scope=\"col\"><b>STT</b></th>" +
+            "                   <th scope=\"col\"><b>Tên xe quan tâm</b></th>" +
+            "                   <th scope=\"col\"><b>Tên liên lạc</b></th>" +
+            "                   <th scope=\"col\"><b>Số điện thoại</b></th>" +
+            "                   <th scope=\"col\"><b>Email</b></th>" +
+            "                   <th scope=\"col\"><b>Thời gian</b></th>" +
+            "                   <th scope=\"col\"><b>Thông tin thêm</b></th>" +
+            "                   <th scope=\"col\"><b>#</b></th>" +
+            "           </tr>" +
+            "   </thead>" +
+            "   <tbody>";
+        for (var i = 0; i < data.length; i++) {
+            let isChecked = ""
+            if (data[i].auto_cars_item.state === 2) isChecked = "checked"
+            // if (parseInt(data.content[i].state) === 1) {
+            table += "" +
+                "   <tr>" +
+                "           <td>" + parseInt(i + 1) + "</td>" +
+                "           <td>" + data[i].auto_cars_item.title + "</td>" +
+                "           <td>" + data[i].name + "</td>" +
+                "           <td>" + data[i].phone_number + "</td>" +
+                "           <td>" + data[i].email + "</td>" +
+                "           <td>" + getFormatedTime(new Date(data[i].created * 1000)) + "</td>" +
+                '           <td style="word-break: break-all">'
+                +
+                data[i].auto_cars_item.description
+                +
+                "           </td>" +
+                "          <td><input type='checkbox'" + isChecked + "  id='check_box_" + data[i].id + "' onclick='addRegistration(" + i + "," + JSON.stringify(data[i]) + " )'></td>" +
+                "   </tr>"
+            // }
+        }
+
+        table += "" +
+            "   </tbody>" +
+            "</table>";
+
+
+        return table;
+    }
+
+    function addRegistration(i, data) {
+        let registration = JSON.parse(sessionStorage.getItem("registration"));
+        let processedRegistration = sessionStorage.getItem("processedRegistration")
+        if (processedRegistration == undefined) {
+            processedRegistration = [];
+        } else {
+            processedRegistration = JSON.parse(processedRegistration);
+        }
+        let data2Update = data.auto_cars_item
+        if ($('#check_box_' + data.id).is(":checked")) {
+            data2Update.state = 2
+        } else {
+            data2Update.state = 1
+        }
+
+        $.ajax({
+            type: 'PUT',
+            url: url + "/customer" + "/" + data.id + "?secret_key=" + sessionStorage.getItem("secret_key"),
+            data: JSON.stringify(data2Update)
+        }).done(function () {
+            console.log("state" + sessionStorage.getItem("active"));
+            document.getElementById("state" + sessionStorage.getItem("active")).click();
+        }).fail(function (msg) {
+            console.log('FAIL');
+        }).always(function (msg) {
+            console.log('ALWAYS');
+        });
+
+
+        // let index = processedRegistration.indexOf(registration[i]);
+        console.log(processedRegistration)
+        let index = processedRegistration.map(function (r) {
+            return r.id;
+        }).indexOf(registration[i].id);
+        if (index == -1) {
+            processedRegistration.push(registration[i])
+        } else {
+            processedRegistration.splice(index, 1);
+        }
+        sessionStorage.setItem("processedRegistration", JSON.stringify(processedRegistration));
+        console.log("processedRegistration", processedRegistration);
+        if (sessionStorage.getItem("active") == 1) {
+            if (processedRegistration.length == 0) {
+                document.getElementById("processed").style.display = "none";
+            } else {
+                document.getElementById("processed").style.display = "block";
+            }
+        }
+
+    }
+
+    function processed() {
+        if (sessionStorage.getItem("active") == 1) {
+            let processedRegistration = sessionStorage.getItem("processedRegistration")
+            if (processedRegistration != undefined && JSON.parse(processedRegistration).length > 0) {
+                processedRegistration = JSON.parse(processedRegistration);
+                let ids = processedRegistration.map(function (r) {
+                    return r.id;
+                })
+                $.ajaxSetup({contentType: "application/json; charset=utf-8",});
+                $.ajax({
+                    type: 'PUT',
+                    url: url + "/customer" + "/" + ids + "?secret_key=" + sessionStorage.getItem("secret_key"),
+                }).done(function () {
+                    console.log("state" + sessionStorage.getItem("active"));
+                    document.getElementById("state" + sessionStorage.getItem("active")).click();
+                }).fail(function (msg) {
+                    console.log('FAIL');
+                }).always(function (msg) {
+                    console.log('ALWAYS');
+                });
+            }
+        }
+
+    }
+
+    function getFormatedTime(date) {
+        var month = '' + (date.getMonth() + 1),
+            day = '' + date.getDate(),
+            year = date.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var s = date.getSeconds();
+        return [day, month, year].join('-') + " " + h + ":" + m;
+    }
+</script>
+
+</html>

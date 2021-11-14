@@ -1,0 +1,129 @@
+.detailRoot {
+    overflow: auto;
+    height: 100%;
+}
+
+.detailContainer {
+    height: fit-content;
+    min-height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 200px;
+    overflow: auto;
+    padding-bottom: 60px;
+}
+
+@media only screen and (max-width: 1250px) {
+    .detailContainer {
+        padding: 0 50px;
+    }
+}
+
+.detailContent {
+    width: 75%;
+    padding: 50px 10px;
+    height: 100%;
+}
+
+.itemDetailName {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-transform: capitalize;
+}
+
+.itemDetailImage {
+    object-fit: contain;
+    width: 80%;
+    height: auto;
+    max-height: 500px;
+}
+
+.submitForm {
+    width: 20%;
+    border: 3px solid #e4e6ea;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: sticky;
+    top: 50px;
+    height: fit-content;
+}
+
+@media only screen and (max-width: 1000px) {
+    .submitForm {
+        width: 25%;
+    }
+
+    .detailContent {
+        width: 65%;
+    }
+}
+
+.formTitle {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.formInstruction {
+    text-transform: uppercase;
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.formInput {
+    min-height: 40px;
+    border-radius: unset;
+    padding: 0 30px;
+    border: 2px solid #757677;
+    margin-bottom: 10px;
+}
+
+.formInput:focus-visible {
+    outline: none;
+}
+
+.formLabel {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.requiredIcon {
+    color: red;
+}
+
+.submitButton {
+    background-color: rgba(27, 66, 131, 0.7);
+    border-radius: 5px;
+    width: 75px;
+    height: 45px;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    align-self: center;
+}
+
+.submitButton:hover {
+    background-color: rgba(27, 66, 131);;
+}
+
+.requireIconExplain {
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    padding-right: 10px;
+    color: grey;
+}
+
+.paperPlaneIcon {
+    margin-right: 10px;
+    color: #6c98e1;
+}
+
+.htmlContent {
+    margin-top: 25px;
+}

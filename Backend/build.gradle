@@ -1,0 +1,62 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+group = 'com.bglobal.gboss'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+bootJar {
+    launchScript()
+    archiveName = 'registration.jar'
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+
+    compile 'org.springframework.boot:spring-boot-starter-mail'
+    compile 'org.springframework.boot:spring-boot-starter-quartz'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring5
+    compile group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.11.RELEASE'
+    compile 'commons-io:commons-io:2.7'
+    // https://mvnrepository.com/artifact/org.mindrot/jbcrypt
+    compile group: 'org.mindrot', name: 'jbcrypt', version: '0.4'// https://mvnrepository.com/artifact/org.json/json
+    compile group: 'org.json', name: 'json', version: '20200518'
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
+    compile group: 'io.jsonwebtoken', name:'jjwt', version: "0.5.1"
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.security:spring-security-oauth2-client'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+    runtime 'mysql:mysql-connector-java'
+    compile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.security:spring-security-test')
+    compile 'org.springframework.boot:spring-boot-starter-validation:2.3.1.RELEASE'
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2
+    compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.7.0'
+    // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
+    compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    compile group: 'com.google.guava', name: 'guava', version: '14.0'
+    // https://mvnrepository.com/artifact/net.arnx/jsonic
+    compile group: 'net.arnx', name: 'jsonic', version: '1.3.10'
+    // https://mvnrepository.com/artifact/joda-time/joda-time
+    compile group: 'joda-time', name: 'joda-time', version: '2.10.6'
+    // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+    compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.0'
+    //swagger: https://search.maven.org/classic/#artifactdetails%7Cio.springfox%7Cspringfox-swagger2%7C3.0.0%7Cjar
+//    compile 'io.springfox:springfox-swagger2:3.0.0'
+//    compile 'io.springfox:springfox-swagger-ui:3.0.0'
+//    compile 'io.springfox:springfox-boot-starter:3.0.0'
+}
+
+test {
+    useJUnitPlatform()
+}

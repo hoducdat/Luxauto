@@ -1,0 +1,18 @@
+.stockList {
+    padding-bottom: 60px;
+}
+
+.stockBody {
+    height: 100%;
+}
+
+.carStockRoot {
+    overflow: auto;
+    height: 100%;
+}
+
+.stockGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    padding: 0 190px;
+}

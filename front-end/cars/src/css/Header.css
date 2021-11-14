@@ -1,0 +1,112 @@
+.rootHeader {
+    background-color: #62c7c0;
+}
+
+.stockHeader {
+    height: 125px;
+    width: auto;
+    display: flex;
+    padding: 0 200px;
+    position: relative;
+}
+
+.logo {
+    width: 120px;
+    cursor: pointer;
+    height: 120px;
+    max-height: 100%;
+}
+
+.brandName {
+    font-size: 48px;
+    font-weight: 700;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}   
+
+.stickyHeader {
+    display: flex;
+    justify-content: space-between;  
+    padding: 10px  200px 0 200px;
+    z-index: 1000;
+}
+
+@media only screen and (max-width: 1000px) {
+    .stockHeader {
+        padding: 0 50px;
+    }
+    
+    .stickyHeader {
+        padding: 10px  50px 0 50px;
+    }
+}
+
+.tabContainer {
+    display: flex;
+    width: 100%;
+}
+
+.tab {
+    cursor: pointer;
+    text-transform: uppercase;
+    min-height: 44px;
+    font-size: 14px;
+    font-weight: 700;
+    border-style: none;
+    padding: 0 25px;
+    min-width: 150px;
+}
+
+.tabActive {
+    background-color: white;
+    color: black;
+    border: 0.5px solid gray
+}
+
+.tabUnActive {
+    background-color: #1cab5e;
+    color: white;
+}
+
+.available {
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #300303 !important;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 5px;
+    margin-left: 15px;
+}
+
+.amount {
+    color: white;
+    font-weight: 700;
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.searchInput {
+    border: 1px solid gray;
+    border-radius: 24px;
+    height: 20px;
+    padding: 5px 10px;
+}
+
+.searchInput:focus-visible {
+    outline: none;
+}
+
+.searchIcon {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+}

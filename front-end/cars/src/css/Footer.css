@@ -1,0 +1,38 @@
+.footer {
+    width: auto;
+    height: fit-content;
+    min-height: 200px;
+    background-color: #e3e8e8;
+    padding: 50px 200px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+}
+
+.footerContentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contact {
+    padding: 10px;
+}
+
+.info {
+    padding: 10px;
+}
+
+.additionalInfo {
+    padding: 10px;
+}
+
+.footerTitle {
+    margin-bottom: 20px;
+}
+
+.footerContent {
+    font-size: 13px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
